@@ -15,7 +15,7 @@ public class Stocks {
 	private Integer stockId;
 	
 	@Column(name = "stock_name")
-	private Integer stockName;
+	private String stockName;
 	
 	@Column(name = "stock_price")
 	private Double stockPrice;
@@ -27,7 +27,7 @@ public class Stocks {
 		super();
 	}
 
-	public Stocks(Integer stockId, Integer stockName, Double stockPrice, Double stockCurrentPrice) {
+	public Stocks(Integer stockId, String stockName, Double stockPrice, Double stockCurrentPrice) {
 		super();
 		this.stockId = stockId;
 		this.stockName = stockName;
@@ -43,11 +43,11 @@ public class Stocks {
 		this.stockId = stockId;
 	}
 
-	public Integer getStockName() {
+	public String getStockName() {
 		return stockName;
 	}
 
-	public void setStockName(Integer stockName) {
+	public void setStockName(String stockName) {
 		this.stockName = stockName;
 	}
 
