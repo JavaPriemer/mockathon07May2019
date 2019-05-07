@@ -32,7 +32,7 @@ public class OrdersServiceImpl implements OrdersService {
 			Stocks stock = stocksRepository.findById(stockid).get();
 			Order order = new Order();
 			order.setQuantity(quantity);
-			order.setAmount(stock.getStockPrice());
+			order.setAmount(StockUtils.calculateComission(quantity, stock.getStockPrice()));
 			order.setOrderStatus("ordered");
 			order.setStockId(stock.getStockId());
 			order.setUserId(userid);
@@ -49,6 +49,7 @@ public class OrdersServiceImpl implements OrdersService {
 		Stocks stock = stockOptional.get();
 		if (price != null && stock != null && stock.getStockPrice().equals(price)) {
 			pOrder.setAmount(StockUtils.calculateComission(pOrder.getQuantity(), pOrder.getAmount()));
+			pOrder.setOrderStatus("Confirmed");
 			ordersRepository.save(pOrder);
 			status = "Order Placed Successfully";
 		}
