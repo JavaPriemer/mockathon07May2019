@@ -5,7 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-@RunWith(Mockito)
+
 public class OrdersServiceImplTest {
 
 	@Test
