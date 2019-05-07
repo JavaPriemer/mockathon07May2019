@@ -45,9 +45,16 @@ public class OrdersServiceImpl implements OrdersService {
 
 	public String confirmOrder(Order pOrder, Integer stockId, Double price) {
 		String status = "Order Status In progress";
-		Optional<Stocks> stockOptional = stocksRepository.findById(stockId);
-		Stocks stock = stockOptional.get();
-		if (price != null && stock != null && stock.getStockPrice().equals(price) && stock.getAvailableQuantity() <= pOrder.getQuantity()) {
+		Optional<Stocks> stockOptional = null;
+		try {
+			stockOptional = stocksRepository.findById(stockId);
+		} catch (Exception e) {
+			status = "No Stock fount for Stock id:"+stockId;
+		}
+		Stocks stock = null;
+		if(stockOptional!=null)
+		stock = stockOptional.get();
+		if (stock !=null && price != null && stock != null && stock.getStockPrice().equals(price) && stock.getAvailableQuantity() <= pOrder.getQuantity()) {
 			pOrder.setAmount(StockUtils.calculateComission(pOrder.getQuantity(), pOrder.getAmount()));
 			pOrder.setOrderStatus("Confirmed");
 			ordersRepository.save(pOrder);

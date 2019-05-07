@@ -2,6 +2,7 @@ package com.hcl.stocks.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -43,7 +44,7 @@ public class StocksController {
 	StocksService stocksService;
 
 	@PostMapping("/confirmOrder")
-	public ResponseEntity<String> confirmOrder(Order pOrder, @RequestParam("orderId") Integer orderId,
+	public ResponseEntity<String> confirmOrder(@RequestBody Order pOrder, @RequestParam("orderId") Integer orderId,
 			@RequestParam("price") Double price) {
 		String msg = orderService.confirmOrder(pOrder, orderId, price);
 		return new ResponseEntity<String>(msg, HttpStatus.OK);
