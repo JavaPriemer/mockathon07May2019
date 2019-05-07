@@ -54,9 +54,11 @@ public class OrdersServiceImpl implements OrdersService {
 		Stocks stock = null;
 		if(stockOptional!=null)
 		stock = stockOptional.get();
-		if (stock !=null && price != null && stock != null && stock.getStockPrice().equals(price) && stock.getAvailableQuantity() <= pOrder.getQuantity()) {
+		if (stock !=null && price != null && stock.getStockPrice().equals(price) && stock.getAvailableQuantity() > pOrder.getQuantity()) {
 			pOrder.setAmount(StockUtils.calculateComission(pOrder.getQuantity(), pOrder.getAmount()));
 			pOrder.setOrderStatus("Confirmed");
+			stock.setAvailableQuantity(stock.getAvailableQuantity()-pOrder.getQuantity());
+			stocksRepository.save(stock);
 			ordersRepository.save(pOrder);
 			status = "Order Placed Successfully";
 		}
