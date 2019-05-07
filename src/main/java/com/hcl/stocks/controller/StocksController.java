@@ -42,9 +42,10 @@ public class StocksController {
 	}
 
 	@PostMapping("/confirmOrder")
-	public ResponseEntity<String> confirmOrder(Order pOrder, @RequestParam("stockId") Integer stockId,
+	public ResponseEntity<String> confirmOrder(Order pOrder, @RequestParam("orderId") Integer orderId,
 			@RequestParam("price") Double price) {
-		return null;
+		String msg = ordersService.confirmOrder(pOrder, orderId, price);
+		return new ResponseEntity<String>(msg, HttpStatus.OK);
 	}
 
 	@GetMapping("/getUser")
