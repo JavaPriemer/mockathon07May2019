@@ -1,11 +1,12 @@
 package com.hcl.stocks.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.hcl.stocks.entities.Stocks;
 import com.hcl.stocks.repository.StocksRepository;
 import com.hcl.stocks.service.StocksService;
 
@@ -14,17 +15,19 @@ public class StocksServiceImpl implements StocksService {
 
 	@Autowired
 	StocksRepository stocksRepository;
-	
+
 	@Override
-	public List<String> getRecommendedList() {
-		List<String> listOfStocks = stocksRepository.findAllStockName();
-		List<String> firstNElementsList = null;
-		if (listOfStocks.size() < 5) {
+	public List<Stocks> getRecommendedList() {
+		List<Stocks> listOfStocks = stocksRepository.findAll();
+		List<Stocks> firstNElementsList = new ArrayList<>();
+
+		if (listOfStocks != null && listOfStocks.size() > 5) {
+			for (int i = 0; i < 5; i++) {
+				firstNElementsList.add(listOfStocks.get(i));
+			}
+		} else
 			firstNElementsList = listOfStocks;
-		} else {
-			firstNElementsList = listOfStocks.stream().limit(5).collect(Collectors.toList());
-		}
 		return firstNElementsList;
 	}
-	
+
 }
