@@ -7,5 +7,7 @@ import com.hcl.stocks.entities.Order;
 
 @Repository
 public interface OrdersRepository extends JpaRepository<Order, Integer> {
+	
+	
 
 }

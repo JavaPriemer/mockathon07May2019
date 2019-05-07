@@ -13,26 +13,31 @@ public class Stocks {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "stock_id")
 	private Integer stockId;
-	
+
 	@Column(name = "stock_name")
-	private Integer stockName;
-	
+	private String stockName;
+
 	@Column(name = "stock_price")
 	private Double stockPrice;
-	
+
 	@Column(name = "stock_current_price")
 	private Double stockCurrentPrice;
-	
+
+	@Column(name = "available_quantity")
+	private Integer availableQuantity;
+
 	public Stocks() {
 		super();
 	}
 
-	public Stocks(Integer stockId, Integer stockName, Double stockPrice, Double stockCurrentPrice) {
+	public Stocks(Integer stockId, String stockName, Double stockPrice, Double stockCurrentPrice,
+			Integer availableQuantity) {
 		super();
 		this.stockId = stockId;
 		this.stockName = stockName;
 		this.stockPrice = stockPrice;
 		this.stockCurrentPrice = stockCurrentPrice;
+		this.availableQuantity = availableQuantity;
 	}
 
 	public Integer getStockId() {
@@ -43,11 +48,11 @@ public class Stocks {
 		this.stockId = stockId;
 	}
 
-	public Integer getStockName() {
+	public String getStockName() {
 		return stockName;
 	}
 
-	public void setStockName(Integer stockName) {
+	public void setStockName(String stockName) {
 		this.stockName = stockName;
 	}
 
@@ -67,10 +72,18 @@ public class Stocks {
 		this.stockCurrentPrice = stockCurrentPrice;
 	}
 
+	public Integer getAvailableQuantity() {
+		return availableQuantity;
+	}
+
+	public void setAvailableQuantity(Integer availableQuantity) {
+		this.availableQuantity = availableQuantity;
+	}
+
 	@Override
 	public String toString() {
 		return "Stocks [stockId=" + stockId + ", stockName=" + stockName + ", stockPrice=" + stockPrice
-				+ ", stockCurrentPrice=" + stockCurrentPrice + "]";
+				+ ", stockCurrentPrice=" + stockCurrentPrice + ", availableQuantity=" + availableQuantity + "]";
 	}
-	
+
 }
