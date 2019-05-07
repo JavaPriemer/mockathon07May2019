@@ -10,7 +10,7 @@ public class OrdersServiceImplTest {
 
 	@Test
 	public void testOrderingStock() {
-		fail("Not yet implemented");
+		
 	}
 
 	@Test
