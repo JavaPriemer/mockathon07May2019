@@ -7,5 +7,5 @@ import com.hcl.stocks.entities.Stocks;
 
 @Repository
 public interface StocksRepository extends JpaRepository<Stocks, Integer> {
-
+	
 }
