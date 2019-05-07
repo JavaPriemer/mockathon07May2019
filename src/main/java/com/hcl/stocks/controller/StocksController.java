@@ -50,13 +50,13 @@ public class StocksController {
 		return new ResponseEntity<String>(msg, HttpStatus.OK);
 	}
 
-	@GetMapping("/getUser")
+	@GetMapping("/userLogin")
 	public ResponseEntity<String> getUser(@RequestParam("userId") Integer userId) {
 		String userLoggedIn = userService.getUser(userId);
 		return new ResponseEntity<String>(userLoggedIn, HttpStatus.OK);
 	}
 
-	@GetMapping("/getRecommendedStocks")
+	@GetMapping("/listRecommendedStocks")
 	public ResponseEntity<List<Stocks>> getRecommendedStocks(@RequestParam("userId") Integer userId) {
 		List<Stocks> recommendedList = stocksService.getRecommendedList();
 		return new ResponseEntity<List<Stocks>>(recommendedList, HttpStatus.OK);

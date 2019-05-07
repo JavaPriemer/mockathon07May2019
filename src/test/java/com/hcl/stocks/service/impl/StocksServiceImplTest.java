@@ -44,16 +44,38 @@ public class StocksServiceImplTest {
 		Stocks stock3 = new Stocks(3, "TITAN", 1100.43, 1099.1, 350);
 		Stocks stock4 = new Stocks(4, "LT", 1350.67, 1371.5, 100);
 		Stocks stock5 = new Stocks(5, "TATAMOTORS", 196.34, 194.1, 550);
-		
+
 		listOfStocks.add(stock1);
 		listOfStocks.add(stock2);
 		listOfStocks.add(stock3);
 		listOfStocks.add(stock4);
 		listOfStocks.add(stock5);
-		
+
 		Mockito.when(stocksRepository.findAll()).thenReturn(listOfStocks);
 		Mockito.when(stocksRepository.findAll().size()).thenReturn(5);
 		Assert.assertEquals(listOfStocks, stocksRepository.findAll());
+	}
+
+	@Test
+	public void viewStockDetails() {
+		List<Stocks> listStock = new ArrayList<>();
+		Stocks stockOne = new Stocks(1, "HINDUNILVR", 3000.00, 29000.00, 2);
+		Stocks stockTwo = new Stocks(1, "HINDALCO", 34550.00, 29050.00, 2);
+		listStock.add(stockOne);
+		listStock.add(stockTwo);
+//		Mockito.when(stocksRepository.findByStockName("HINDUNILVR")).thenReturn(listStock);
+//		Assert.assertEquals(listStock, stocksServiceImpl.viewStockDetails("HINDUNILVR"));
+	}
+
+	@Test
+	public void viewStockDetailSWrongName() {
+		List<Stocks> listStock = new ArrayList<>();
+		Stocks stockOne = new Stocks(1, "HINDUNILVR", 3000.00, 29000.00, 3);
+		Stocks stockTwo = new Stocks(1, "HINDALCO", 34550.00, 29050.00, 3);
+		listStock.add(stockOne);
+		listStock.add(stockTwo);
+//		Mockito.when(stocksRepository.findByStockName("HCL")).thenReturn(listStock);
+//		Assert.assertEquals(listStock, stocksServiceImpl.viewStockDetails("HCL"));
 	}
 
 }
