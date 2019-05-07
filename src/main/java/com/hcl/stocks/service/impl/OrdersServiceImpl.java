@@ -47,7 +47,7 @@ public class OrdersServiceImpl implements OrdersService {
 		String status = "Order Status In progress";
 		Optional<Stocks> stockOptional = stocksRepository.findById(stockId);
 		Stocks stock = stockOptional.get();
-		if (price != null && stock != null && stock.getStockPrice().equals(price)) {
+		if (price != null && stock != null && stock.getStockPrice().equals(price) && stock.getAvailableQuantity() <= pOrder.getQuantity()) {
 			pOrder.setAmount(StockUtils.calculateComission(pOrder.getQuantity(), pOrder.getAmount()));
 			pOrder.setOrderStatus("Confirmed");
 			ordersRepository.save(pOrder);
@@ -55,7 +55,7 @@ public class OrdersServiceImpl implements OrdersService {
 		}
 		else
 		{
-			status = "Either stock  not available or change in Stock price";
+			status = "Either stock  not available or changes in Stock price";
 		}
 
 		return status;
