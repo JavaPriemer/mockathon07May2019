@@ -28,22 +28,41 @@ public class StocksController {
 	OrdersService ordersService;
 	@Autowired
 	StocksService stocksService;
-	
+
+	/**
+	 * 
+	 * @param stockid
+	 * @param userid
+	 * @param quantity
+	 * @return
+	 */
 	@PostMapping("/orderstock")
 	public String orderingStock(@RequestParam("stockid") Integer stockid, @RequestParam("userid") Integer userid,
 			@RequestParam("quantity") Integer quantity) {
 		String msg = ordersService.orderingStock(stockid, userid, quantity);
 		return msg;
 	}
-	
+
+	/**
+	 * 
+	 * @param stockName
+	 * @return Stocks based on Stock name
+	 */
 	@GetMapping("/getStock/{stockName}")
 	public List<Stocks> getStock(@PathVariable String stockName) {
-	return stocksService.viewStockDetails(stockName);
+		return stocksService.viewStockDetails(stockName);
 	}
-	
+
 	@Autowired
 	UserService userService;
 
+	/**
+	 * 
+	 * @param pOrder
+	 * @param orderId
+	 * @param price
+	 * @return Order Confirmation status.
+	 */
 	@PostMapping("/confirmOrder")
 	public ResponseEntity<String> confirmOrder(@RequestBody Order pOrder, @RequestParam("orderId") Integer orderId,
 			@RequestParam("price") Double price) {
@@ -51,21 +70,36 @@ public class StocksController {
 		return new ResponseEntity<String>(msg, HttpStatus.OK);
 	}
 
+	/**
+	 * 
+	 * @param userId
+	 * @return User Login Status
+	 */
 	@GetMapping("/userLogin")
 	public ResponseEntity<String> getUser(@RequestParam("userId") Integer userId) {
 		String userLoggedIn = userService.getUser(userId);
 		return new ResponseEntity<String>(userLoggedIn, HttpStatus.OK);
 	}
 
+	/**
+	 * 
+	 * @param userId
+	 * @return list of recommended stocks
+	 */
 	@GetMapping("/listRecommendedStocks")
 	public ResponseEntity<List<Stocks>> getRecommendedStocks(@RequestParam("userId") Integer userId) {
 		List<Stocks> recommendedList = stocksService.getRecommendedList();
 		return new ResponseEntity<List<Stocks>>(recommendedList, HttpStatus.OK);
 	}
-	
+
+	/**
+	 * 
+	 * @param stockId
+	 * @return stock details
+	 */
 	@GetMapping("/stockdetails")
-	public com.hcl.stocks.entities.Stocks stockdetails(@RequestParam("stockId") Integer stockId ) {
-	  return stocksService.getQuote(stockId);
+	public com.hcl.stocks.entities.Stocks stockdetails(@RequestParam("stockId") Integer stockId) {
+		return stocksService.getQuote(stockId);
 	}
 
 }
