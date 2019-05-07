@@ -25,33 +25,36 @@ import com.hcl.stocks.service.UserService;
 @RestController
 @RequestMapping("/stocks")
 public class StocksController {
-	
+	@Autowired
+	OrdersService orderService;
 	@Autowired
 	OrdersService ordersService;
-	
+
 	@PostMapping("/orderstock")
-	public String orderingStock(@RequestParam("stockid") Integer stockid, @RequestParam("userid")Integer userid,@RequestParam("quantity")Integer quantity) {
-		String msg = ordersService.orderingStock(stockid,userid,quantity);
-	  return msg;		
+	public String orderingStock(@RequestParam("stockid") Integer stockid, @RequestParam("userid") Integer userid,
+			@RequestParam("quantity") Integer quantity) {
+		String msg = ordersService.orderingStock(stockid, userid, quantity);
+		return msg;
 	}
 
 	@Autowired
 	UserService userService;
 	@Autowired
 	StocksService stocksService;
-	
+
 	@PostMapping("/confirmOrder")
-	public ResponseEntity<String> confirmOrder(Order pOrder, @RequestParam("stockId") Integer stockId,
+	public ResponseEntity<String> confirmOrder(Order pOrder, @RequestParam("orderId") Integer orderId,
 			@RequestParam("price") Double price) {
-		return null;
+		String msg = orderService.confirmOrder(pOrder, orderId, price);
+		return new ResponseEntity<String>(msg, HttpStatus.OK);
 	}
-	
+
 	@GetMapping("/getUser")
 	public ResponseEntity<String> getUser(@RequestParam("userId") Integer userId) {
 		String userLoggedIn = userService.getUser(userId);
 		return new ResponseEntity<String>(userLoggedIn, HttpStatus.OK);
 	}
-	
+
 	@GetMapping("/getRecommendedStocks")
 	public ResponseEntity<List<Stocks>> getRecommendedStocks(@RequestParam("userId") Integer userId) {
 		List<Stocks> recommendedList = stocksService.getRecommendedList();
