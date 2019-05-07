@@ -10,6 +10,8 @@ import com.hcl.stocks.entities.Stocks;
 
 @Repository
 public interface StocksRepository extends JpaRepository<Stocks, Integer> {
+
 	@Query("select s from Stocks s where s.stockName = ?1")
 	List<Stocks> findByStockName(String stockName);
+
 }

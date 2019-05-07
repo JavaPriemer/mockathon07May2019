@@ -16,7 +16,7 @@ import com.hcl.stocks.repository.StocksRepository;
 import com.hcl.stocks.service.impl.StocksServiceImpl;
 
 @RunWith(MockitoJUnitRunner.class)
-public class StocksServiceTest {
+public class StocksServiceImplTest {
 
 	@InjectMocks
 	private StocksServiceImpl stocksServiceImpl;
@@ -27,8 +27,8 @@ public class StocksServiceTest {
 	@Test
 	public void viewStockDetails() {
 		List<Stocks> listStock = new ArrayList<>();
-		Stocks stockOne = new Stocks(1, "HINDUNILVR", 3000.00, 29000.00);
-		Stocks stockTwo = new Stocks(1, "HINDALCO", 34550.00, 29050.00);
+		Stocks stockOne = new Stocks(1, "HINDUNILVR", 3000.00, 29000.00,2);
+		Stocks stockTwo = new Stocks(1, "HINDALCO", 34550.00, 29050.00,2);
 		listStock.add(stockOne);
 		listStock.add(stockTwo);
 		Mockito.when(stocksRepository.findByStockName("HINDUNILVR")).thenReturn(listStock);
@@ -37,8 +37,8 @@ public class StocksServiceTest {
 	@Test
 	public void viewStockDetailSWrongName() {
 		List<Stocks> listStock = new ArrayList<>();
-		Stocks stockOne = new Stocks(1, "HINDUNILVR", 3000.00, 29000.00);
-		Stocks stockTwo = new Stocks(1, "HINDALCO", 34550.00, 29050.00);
+		Stocks stockOne = new Stocks(1, "HINDUNILVR", 3000.00, 29000.00,3);
+		Stocks stockTwo = new Stocks(1, "HINDALCO", 34550.00, 29050.00,3);
 		listStock.add(stockOne);
 		listStock.add(stockTwo);
 		Mockito.when(stocksRepository.findByStockName("WIPRO")).thenReturn(listStock);

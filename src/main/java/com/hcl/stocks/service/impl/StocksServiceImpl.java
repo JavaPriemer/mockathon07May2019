@@ -1,5 +1,6 @@
 package com.hcl.stocks.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,20 @@ public class StocksServiceImpl implements StocksService {
 	@Override
 	public List<Stocks> viewStockDetails(String stockName) {
 		return stocksRepository.findByStockName(stockName);
+	}
+
+	@Override
+	public List<Stocks> getRecommendedList() {
+		List<Stocks> listOfStocks = stocksRepository.findAll();
+		List<Stocks> firstNElementsList = new ArrayList<>();
+
+		if (listOfStocks != null && listOfStocks.size() > 5) {
+			for (int i = 0; i < 5; i++) {
+				firstNElementsList.add(listOfStocks.get(i));
+			}
+		} else
+			firstNElementsList = listOfStocks;
+		return firstNElementsList;
 	}
 
 }

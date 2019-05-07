@@ -9,6 +9,10 @@ import com.hcl.stocks.entities.Stocks;
 @Service
 public interface StocksService {
 
+
 	List<Stocks> viewStockDetails(String stockName);
+
+
+	List<Stocks> getRecommendedList();
 
 }
