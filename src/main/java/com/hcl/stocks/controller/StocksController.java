@@ -1,5 +1,11 @@
 package com.hcl.stocks.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.hcl.stocks.service.OrdersService;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +25,15 @@ import com.hcl.stocks.service.UserService;
 @RestController
 @RequestMapping("/stocks")
 public class StocksController {
+	
+	@Autowired
+	OrdersService ordersService;
+	
+	@PostMapping("/orderstock")
+	public String orderingStock(@RequestParam("stockid") Integer stockid, @RequestParam("userid")Integer userid,@RequestParam("quantity")Integer quantity) {
+		String msg = ordersService.orderingStock(stockid,userid,quantity);
+	  return msg;		
+	}
 
 	@Autowired
 	UserService userService;
