@@ -30,4 +30,13 @@ public class StocksServiceImpl implements StocksService {
 		return firstNElementsList;
 	}
 
+	@Override
+	public List<Stocks> viewStockDetails(String stockName) {
+		return stocksRepository.findByStockName(stockName);
+	}
+	
+	@Override
+	public Stocks getQuote(Integer stockId) {
+	return stocksRepository.findById(stockId).get();
+	}
 }

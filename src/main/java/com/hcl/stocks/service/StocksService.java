@@ -10,5 +10,8 @@ import com.hcl.stocks.entities.Stocks;
 public interface StocksService {
 
 	List<Stocks> getRecommendedList();
-	
+
+	List<Stocks> viewStockDetails(String stockName);
+
+	Stocks getQuote(Integer stockId);
 }
